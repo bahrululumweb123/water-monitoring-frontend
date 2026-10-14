@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - IoT Water Monitoring</title>
+    <link rel="stylesheet" href="water.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand"><h2>IoT SYSTEM</h2></div>
+            <ul class="sidebar-menu">
+                <li class="active"><a href="index.html">📊 Dashboard</a></li>
+                <li><a href="datalog.html">📁 Data Log</a></li>
+                <li><a href="analytics.html">📈 Analytics</a></li>
+
+                <!-- Tambahkan baris ini di bagian bawah sidebar-menu sebelum </ul> -->
+                <li style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                    <a href="#" onclick="logoutUser()" style="color: #f87171;">🚪 Logout</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- KONTEN -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">INTERNET OF THINGS | SISTEM MONITORING KUALITAS AIR</div>
+                <div class="header-right">
+                    <span id="liveClock" class="clock-badge">--</span>
+                    <span class="user-badge">👤 Hi User, Welcome Back!</span>
+                </div>
+            </header>
+
+            <section class="dashboard-section">
+                <h2 class="section-title">DASHBOARD REAL-TIME</h2>
+                <div class="cards-grid-4">
+                    <div class="card card-green">
+                        <div class="card-icon">💧</div>
+                        <div class="card-label">TDS AIR</div>
+                        <div class="card-value" id="tdsVal">721.7 <span class="unit">ppm</span></div>
+                    </div>
+                    <div class="card card-orange">
+                        <div class="card-icon">🌡️</div>
+                        <div class="card-label">SUHU AIR</div>
+                        <div class="card-value" id="suhuVal">29 <span class="unit">°C</span></div>
+                    </div>
+                    <div class="card card-blue">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-label">ELECTRICAL CONDUCTIVITY (EC)</div>
+                        <div class="card-value" id="ecVal">1414 <span class="unit">µS/cm</span></div>
+                    </div>
+                    <div class="card card-purple" id="cardStatus">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-label">STATUS KUALITAS AIR</div>
+                        <div class="card-value status-text" id="statusKualitas">BAIK</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="water.js"></script>
+</body>
+</html>

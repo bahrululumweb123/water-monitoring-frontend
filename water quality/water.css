@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0d0614 0%, #1a0b2e 100%);
+    color: #e2e8f0;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* SIDEBAR KIRI */
+.sidebar {
+    width: 250px;
+    background-color: #12071f;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-brand h2 {
+    font-size: 16px;
+    color: #a855f7;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    color: #94a3b8;
+}
+
+.sidebar-menu li.active, .sidebar-menu li:hover {
+    background-color: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    font-weight: bold;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.top-header {
+    background: linear-gradient(135deg, #581c87, #3b0764);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.clock-badge {
+    background: rgba(0, 0, 0, 0.3);
+    color: #e2e8f0;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-badge {
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+/* KONTEN SECTION */
+.dashboard-section {
+    padding: 30px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #f8fafc;
+    letter-spacing: 0.5px;
+}
+
+/* GRID KARTU DASHBOARD */
+.cards-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 1000px;
+}
+
+.card {
+    padding: 25px;
+    border-radius: 14px;
+    color: white;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.card-icon {
+    font-size: 28px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0.85;
+}
+
+.card-label {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    opacity: 0.9;
+}
+
+.card-value {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.card-value .unit {
+    font-size: 18px;
+    font-weight: normal;
+    opacity: 0.85;
+}
+
+.status-text {
+    font-size: 32px !important;
+}
+
+/* WARNA KARTU */
+.card-green { background: linear-gradient(135deg, #10b981, #059669); }
+.card-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.card-blue { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+.card-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.card-bad { background: linear-gradient(135deg, #ef4444, #991b1b) !important; }
+
+/* TABEL DATA LOG */
+.table-container {
+    background: rgba(18, 7, 31, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 1100px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+.data-table th, .data-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table th {
+    background: rgba(88, 28, 135, 0.4);
+    color: #c084fc;
+    font-weight: bold;
+}
+
+.data-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* KONTROL ALAT & ANALYTICS */
+.control-grid, .analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 1000px;
+}
+
+.control-card {
+    background: rgba(18, 7, 31, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 25px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-on { background: #10b981; color: white; }
+.btn-off { background: #ef4444; color: white; }
+.btn-action:hover { opacity: 0.9; transform: scale(1.02); }

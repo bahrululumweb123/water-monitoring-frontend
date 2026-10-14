@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - IoT Water Monitoring</title>
+    <link rel="stylesheet" href="water.css">
+    <!-- Tambahkan library Chart.js agar grafik bisa aktif -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand"><h2>IoT SYSTEM</h2></div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html">📊 Dashboard</a></li>
+                <li><a href="datalog.html">📁 Data Log</a></li>
+                <li class="active"><a href="analytics.html">📈 Analytics</a></li>
+
+                <li style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px;">
+                    <a href="#" onclick="logoutUser()" style="color: #f87171;">🚪 Logout</a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">GRAFIK ANALISIS FLUKTUASI SENSOR KUALITAS AIR</div>
+                <div class="header-right"><span id="liveClock" class="clock-badge">--</span></div>
+            </header>
+
+            <section class="dashboard-section">
+                <h2 class="section-title">STATISTIK TREN HARIAN</h2>
+                
+                <!-- Area Grafik dengan Keterangan Suhu, TDS, dan EC -->
+                <div class="control-card" style="padding: 20px;">
+                    <h3 style="margin-bottom: 5px; color: #fff;">Grafik Pergerakan Sensor</h3>
+                    <p style="color: #94a3b8; font-size: 12px; margin-bottom: 15px;">Menampilkan pergerakan grafik Suhu, TDS, dan EC secara periodik.</p>
+                    <div style="position: relative; height: 350px; width: 100%;">
+                        <canvas id="waterAnalyticsChart"></canvas>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="water.js"></script>
+</body>
+</html>

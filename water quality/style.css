@@ -1,0 +1,189 @@
+/* HALAMAN LOGIN Keren & Senada */
+.login-body {
+    background: linear-gradient(135deg, #0d0614 0%, #1a0b2e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.login-card {
+    background: rgba(18, 7, 31, 0.75);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    padding: 45px 35px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.15);
+    backdrop-filter: blur(15px);
+    position: relative;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    border-radius: 2px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.login-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    background: rgba(168, 85, 247, 0.15);
+    width: 70px;
+    height: 70px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.login-header h2 {
+    color: #f8fafc;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.login-header p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.input-box {
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(13, 6, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #a855f7;
+    background: rgba(13, 6, 20, 0.9);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #9333ea, #6b21a8);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #a855f7, #7e22ce);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+}
+
+.error-msg {
+    color: #f87171;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    display: none;
+}
+
+/* ================================================= */
+/* RESPONSIVE DESIGN UNTUK MOBILE / HP               */
+/* ================================================= */
+@media screen and (max-width: 768px) {
+    /* Ubah layout utama jadi vertikal (sidebar di atas, konten di bawah) */
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        overflow: auto;
+    }
+
+    /* Sidebar jadi melebar penuh ke atas */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        margin-top: 10px;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+
+    /* Konten utama menyesuaikan */
+    .main-content {
+        height: auto;
+        overflow: visible;
+    }
+
+    /* Kartu dashboard 4 parameter jadi 1 kolom ke bawah di HP */
+    .cards-grid-4, .control-grid, .analytics-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .top-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
