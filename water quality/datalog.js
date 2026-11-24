@@ -7,7 +7,7 @@ function updateLiveClock() {
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
         const timeString = now.toTimeString().split(' ')[0]; // Format HH:MM:SS
-        
+
         clockElement.innerText = `${year}-${month}-${day} | ${timeString}`;
     }
 }
@@ -17,57 +17,81 @@ setInterval(updateLiveClock, 1000);
 updateLiveClock();
 
 
-// --- 2. SCRIPT FETCH RIWAYAT DATA SENSOR ---
+// --- 2. SCRIPT RIWAYAT DATA SENSOR DARI EMQX (LOCALSTORAGE) ---
+const KEY_RIWAYAT_LOG = 'riwayatSensorEMQX';
+
 function fetchSensorHistory() {
-    fetch('http://192.168.1.8:8000/api/sensor/history')
-        .then(response => response.json())
-        .then(result => {
-            // Menyesuaikan dengan struktur data Laravel (bisa result.data atau langsung result)
-            const dataArray = result.data || result;
-            
-            let tableBody = document.getElementById('logTableBody'); 
-            if (!tableBody) return;
-            
-            let html = '';
-            dataArray.forEach(row => {
-                let nilaiTds = parseFloat(row.tds);
-                let statusText = "BAIK";
-                let statusClass = "text-success";
+    let dataArray = [];
 
-                // Logika 4 kategori status kualitas air yang konsisten
-                if (isNaN(nilaiTds)) {
-                    statusText = "MENUNGGU...";
-                    statusClass = "text-muted";
-                } else if (nilaiTds <= 300) {
-                    statusText = "BAIK";
-                    statusClass = "text-success";
-                } else if (nilaiTds <= 600) {
-                    statusText = "CUKUP";
-                    statusClass = "text-warning";
-                } else if (nilaiTds <= 900) {
-                    statusText = "KURANG";
-                    statusClass = "text-orange";
-                } else {
-                    statusText = "BURUK";
-                    statusClass = "text-danger";
-                }
+    try {
+        const raw = localStorage.getItem(KEY_RIWAYAT_LOG);
+        dataArray = raw ? JSON.parse(raw) : [];
+    } catch (error) {
+        console.error('Gagal membaca riwayat data log:', error);
+        dataArray = [];
+    }
 
-                html += `
-                    <tr>
-                        <td>${row.created_at}</td>
-                        <td>${row.tds} ppm</td>
-                        <td>${row.suhu} °C</td>
-                        <td>${row.ec} µS/cm</td>
-                        <td><strong class="${statusClass}">${statusText}</strong></td>
-                    </tr>
-                `;
-            });
-            
-            tableBody.innerHTML = html;
-        })
-        .catch(error => console.error('Gagal memuat data log:', error));
+    const tableBody = document.getElementById('logTableBody');
+    if (!tableBody) return;
+
+    if (!Array.isArray(dataArray) || dataArray.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 16px;">
+                    Menunggu data sensor masuk dari EMQX Cloud...
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    // Tampilkan data terbaru di paling atas
+    const dataTerbaru = [...dataArray].reverse();
+
+    let html = '';
+    dataTerbaru.forEach(row => {
+        const nilaiTds = parseFloat(row.tds);
+        let statusText = row.status || "BAIK";
+        let statusClass = "text-success";
+
+        // Logika 4 kategori status kualitas air yang konsisten
+        if (isNaN(nilaiTds)) {
+            statusText = "MENUNGGU...";
+            statusClass = "text-muted";
+        } else if (nilaiTds <= 300) {
+            statusText = row.status || "BAIK";
+            statusClass = "text-success";
+        } else if (nilaiTds <= 600) {
+            statusText = row.status || "CUKUP";
+            statusClass = "text-warning";
+        } else if (nilaiTds <= 900) {
+            statusText = row.status || "KURANG";
+            statusClass = "text-orange";
+        } else {
+            statusText = row.status || "BURUK";
+            statusClass = "text-danger";
+        }
+
+        html += `
+            <tr>
+                <td>${row.created_at || '-'}</td>
+                <td>${row.tds ?? '-'} ppm</td>
+                <td>${row.suhu ?? '-'} °C</td>
+                <td>${row.ec ?? '-'} µS/cm</td>
+                <td><strong class="${statusClass}">${statusText}</strong></td>
+            </tr>
+        `;
+    });
+
+    tableBody.innerHTML = html;
 }
 
-// Jalankan fungsi fetch data saat halaman dimuat dan perbarui tiap 3 detik
+// Perbarui otomatis jika localStorage berubah atau tiap 3 detik
+window.addEventListener('storage', (event) => {
+    if (event.key === KEY_RIWAYAT_LOG) {
+        fetchSensorHistory();
+    }
+});
+
 setInterval(fetchSensorHistory, 3000);
 fetchSensorHistory();
